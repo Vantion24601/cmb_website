@@ -1,3 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>个人金融入门馆 — 金融基础知识导览</title>
+</head>
+
+<body>
+
+Hello World!
+
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -41,6 +54,72 @@
     color: var(--text-dark);
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  .watermark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(水印.jpeg) center/40% no-repeat;
+    opacity: 0.05;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 60px;
+    height: 60px;
+    z-index: 1;
+  }
+
+  #overview .section-title::before {
+    background: url(79f8eddf4988ae56f8a0ff42586d22de.png) center/contain no-repeat;
+  }
+
+  #module1 .section-title::before {
+    background: url(083dd97cbd9acdcfd64a434a7f91ec49.jpeg) center/contain no-repeat;
+  }
+
+  #module2 .section-title::before {
+    background: url(0e120a370c4bd0f8e02f7b9bd3793e09.jpg) center/contain no-repeat;
+  }
+
+  #module3 .section-title::before {
+    background: url(2fdf6d14ebc6155f7240df526b656211.jpg) center/contain no-repeat;
+  }
+
+  #module4 .section-title::before {
+    background: url(c68c4b73e296ca96f7c6b9d535bb43a5.jpeg) center/contain no-repeat;
+  }
+
+  #module5 .section-title::before {
+    background: url(d3b78fc3f23bc46d179c1209a5a6b3c4.gif) center/contain no-repeat;
+  }
+
+  #module6 .section-title::before {
+    background: url(79f8eddf4988ae56f8a0ff42586d22de.png) center/contain no-repeat;
   }
 
   /* ── NAV ── */
@@ -1349,6 +1428,8 @@
 </head>
 <body>
 
+<div class="watermark"></div>
+
 <!-- ── NAV ── -->
 <nav id="main-nav">
   <div class="nav-logo">
@@ -1836,6 +1917,102 @@
       </div>
     </div>
   </div>
+  <!-- ── AI INTERACTION TEST ── -->
+<div style="margin-top: 60px; padding: 40px 0; background: linear-gradient(to right, #f8f9fb, #eef1f6); border-radius: 16px; border: 1px solid #dde3ed;">
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 12px; text-align: center;">
+    🤖 AI 模拟测验：你是反诈专家吗？
+  </h3>
+  <p style="text-align: center; color: var(--text-light); max-width: 700px; margin: 0 auto 30px; font-size: 14px;">
+    输入一条可疑的短信或语音转录文本，我们的“AI 考官”将实时分析其诈骗风险等级。
+  </p>
+  
+  <div style="display: flex; gap: 12px; max-width: 800px; margin: 0 auto; flex-wrap: wrap;">
+    <textarea id="scamInput" rows="4" style="flex: 1; min-width: 300px; padding: 16px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; resize: vertical;">刚刚有个电话说我的社保卡违规，让我转钱到安全账户，还给了我一个网址让我查通缉令。</textarea>
+    <button onclick="runAIScamTest()" style="padding: 0 32px; background: var(--accent-teal); color: var(--white); border: none; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; white-space: nowrap; height: 56px; align-self: flex-end; transition: 0.2s; box-shadow: 0 4px 12px rgba(26,96,138,0.3);">AI 实时分析</button>
+  </div>
+
+  <div id="aiResult" style="max-width: 800px; margin: 30px auto 0; padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; display: none; animation: fadeIn 0.5s;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <span id="riskLevel" style="font-weight: 700;">风险等级：</span>
+      <span id="scoreBadge" style="background: #fef3f3; color: #c0392b; padding: 4px 12px; border-radius: 20px; font-size: 13px;">极高风险</span>
+    </div>
+    <div style="height: 2px; background: linear-gradient(to right, #c0392b, transparent); margin-bottom: 16px;"></div>
+    <h4 style="font-size: 16px; margin-bottom: 8px; color: var(--navy);">AI 分析结论：</h4>
+    <p id="aiConclusion" style="color: var(--text-light); line-height: 1.7; font-size: 14px;"></p>
+    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--gray-100);">
+      <h5 style="font-size: 13px; color: #7a5a10; margin-bottom: 8px;">🔍 AI 是如何判断的？</h5>
+      <ul id="aiReasons" style="color: var(--text-light); font-size: 13px; line-height: 1.7; padding-left: 20px;"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function runAIScamTest() {
+  const inputText = document.getElementById('scamInput').value.toLowerCase();
+  const resultDiv = document.getElementById('aiResult');
+  const conclusionP = document.getElementById('aiConclusion');
+  const reasonsList = document.getElementById('aiReasons');
+  const scoreBadge = document.getElementById('scoreBadge');
+  const riskLevel = document.getElementById('riskLevel');
+
+  // 清空之前的分析
+  reasonsList.innerHTML = '';
+  
+  let riskScore = 0;
+  let reasons = [];
+  let conclusion = '';
+
+  // 模拟 AI 的“深度学习”逻辑 - 关键词扫描与逻辑判断
+  const redFlags = {
+    '安全账户': "提及'安全账户'是典型的公检法诈骗话术，正规机构绝不会要求转账到安全账户。",
+    '验证码': "索要'验证码'是直接盗取资金的关键步骤，绝对不能提供。",
+    '转账': "在非面对面的情况下，要求'转账'通常伴随着资金损失风险。",
+    '通缉令': "通过网络发送'通缉令'链接是伪造法律文书的常见手段。",
+    '刷单': "承诺'刷单'返利是典型的兼职诈骗，前期小额返利是为了骗取大额本金。",
+    '内幕消息': "声称有'内幕消息'或'稳赚不赔'属于虚假投资诈骗。",
+    '退款': "主动提及'退款'但需要你先转账或提供卡号，通常是冒充客服诈骗。",
+    '违禁': "通知你的账户/社保卡'违规/违禁'，制造恐慌心理是诈骗的第一步。"
+  };
+
+  // 扫描文本
+  Object.keys(redFlags).forEach(key => {
+    if (inputText.includes(key.toLowerCase())) {
+      riskScore += 20;
+      reasons.push(`<li><strong>[触发]</strong> ${redFlags[key]}</li>`);
+    }
+  });
+
+  // 逻辑判断
+  if (riskScore >= 60) {
+    scoreBadge.textContent = '🔴 极高风险 (95%)';
+    scoreBadge.style.background = '#ffeaea';
+    scoreBadge.style.color = '#c0392b';
+    conclusion = "🚨 警告：这极有可能是诈骗！请立即挂断电话或删除短信，绝对不要转账或点击链接。";
+  } else if (riskScore >= 30) {
+    scoreBadge.textContent = '⚠️ 中高风险 (60%)';
+    scoreBadge.style.background = '#fff8e8';
+    scoreBadge.style.color = '#c8a84b';
+    conclusion = "💡 警惕：这存在诈骗嫌疑。请通过官方渠道（如银行官网电话）核实对方身份，不要轻信。";
+  } else {
+    scoreBadge.textContent = '✅ 低风险 (10%)';
+    scoreBadge.style.background = '#e8fff0';
+    scoreBadge.style.color = '#27ae60';
+    conclusion = "🛡️ 安全：目前未检测到明显的诈骗特征，但请继续保持警惕，保护好个人隐私。";
+    reasons.push("<li>未检测到明显的高危诈骗关键词。</li>");
+  }
+
+  // 如果没有触发关键词，但有诱导行为
+  if (reasons.length === 0 && (inputText.includes('钱') || inputText.includes('卡'))) {
+    reasons.push("<li>文本涉及资金操作，请务必核实对方身份。</li>");
+  }
+
+  // 更新页面
+  conclusionP.textContent = conclusion;
+  reasonsList.innerHTML = reasons.join('');
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
 </section>
 
 <!-- ── MODULE 6 ── -->
@@ -1902,6 +2079,98 @@
       </div>
     </div>
   </div>
+  <!-- ── PERSONALIZED RECOMMENDER ── -->
+<div style="margin-top: 60px; padding: 40px 0; background: linear-gradient(to right, #f5f7fa, #e4f1f7); border-radius: 16px; border: 1px solid #dcebf7;">
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 12px; text-align: center;">
+    💡 个性化理财规划助手
+  </h3>
+  <p style="text-align: center; color: var(--text-light); max-width: 700px; margin: 0 auto 30px; font-size: 14px;">
+    回答以下 3 个问题，获取专属于你的金融产品配置建议。
+  </p>
+
+  <div style="max-width: 700px; margin: 0 auto; background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--gray-200);">
+    <form id="financeForm" onsubmit="event.preventDefault(); generateAdvice();">
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--navy);">1. 你的年龄段？</label>
+        <select id="age" required style="width: 100%; padding: 10px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 14px;">
+          <option value="20s">20-30岁 (积累期)</option>
+          <option value="30s">30-45岁 (成长期)</option>
+          <option value="45s">45-60岁 (稳健期)</option>
+          <option value="60p">60岁以上 (养老期)</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--navy);">2. 你的理财目标是？</label>
+        <select id="goal" required style="width: 100%; padding: 10px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 14px;">
+          <option value="safe">保本增值，跑赢通胀</option>
+          <option value="grow">追求较高收益，愿意承担波动</option>
+          <option value="reserve">资金储备，随时可能要用</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--navy);">3. 如果投资亏损 10%，你会？</label>
+        <select id="risk" required style="width: 100%; padding: 10px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 14px;">
+          <option value="low">很难接受，我会立刻赎回</option>
+          <option value="mid">有点难受，但会继续持有观察</option>
+          <option value="high">可以接受，长期投资总有波动</option>
+        </select>
+      </div>
+
+      <button type="submit" style="width: 100%; padding: 14px; background: var(--navy); color: var(--gold); border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;">
+        生成我的专属建议
+      </button>
+    </form>
+
+    <div id="adviceResult" style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px; display: none;">
+      <h4 style="font-size: 18px; margin-bottom: 12px; color: var(--navy);">📝 你的专属理财建议</h4>
+      <div id="adviceContent" style="color: var(--text-light); line-height: 1.7; font-size: 14px;"></div>
+      
+      <div id="productTags" style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function generateAdvice() {
+  const age = document.getElementById('age').value;
+  const goal = document.getElementById('goal').value;
+  const risk = document.getElementById('risk').value;
+  const resultDiv = document.getElementById('adviceResult');
+  const contentDiv = document.getElementById('adviceContent');
+  const tagsDiv = document.getElementById('productTags');
+
+  // 模拟 AI 的“决策树”
+  let advice = '';
+  let products = [];
+
+  // 核心逻辑判断
+  if (risk === 'low' || goal === 'safe') {
+    // 保守型逻辑
+    advice = "<strong>【稳健保守策略】</strong><br>根据你的风险偏好，建议优先考虑资金的安全性和流动性。现阶段不建议配置高风险产品，应以<em>存款</em>和<em>国债</em>为主，辅以少量的<em>货币基金</em>作为零钱管理。";
+    products = ['🏦 定期存款', '🛡️ 国债/大额存单', '💳 货币基金'];
+  } else if (age === '20s' && risk === 'high') {
+    // 年轻激进型逻辑
+    advice = "<strong>【积极成长策略】</strong><br>你正处于人生的积累期，且风险承受力较强。建议采用<em>核心-卫星</em>策略：70%配置在<em>指数基金/股票型基金</em>以博取长期高收益，30%配置在<em>债券基金</em>作为防守。";
+    products = ['📈 指数基金', '💼 股票型基金', '📉 债券基金'];
+  } else if (age === '60p') {
+    // 养老稳健逻辑
+    advice = "<strong>【养老保障策略】</strong><br>考虑到您的年龄段，理财的核心应从'增值'转变为'保值与现金流'。建议大幅降低权益类资产，重点配置<em>养老保险</em>、<em>稳健理财</em>和<em>存款</em>，确保资金绝对安全。";
+    products = ['👵 养老年金', '🏦 稳健理财', '📜 储蓄存款'];
+  } else {
+    // 普通平衡逻辑
+    advice = "<strong>【均衡配置策略】</strong><br>建议采取攻守兼备的策略。可以将资金分为三份：一部分用于<em>存款</em>应急，一部分用于<em>债券/理财</em>稳健增值，剩余一部分用于<em>基金定投</em>追求市场平均收益。";
+    products = ['💰 储蓄存款', '📊 债券/理财', '📉 基金定投'];
+  }
+
+  // 更新页面内容
+  contentDiv.innerHTML = advice;
+  tagsDiv.innerHTML = products.map(p => `<span style="background: var(--navy); color: var(--gold); padding: 4px 12px; border-radius: 12px; font-size: 13px;">${p}</span>`).join('');
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -1985,4 +2254,24 @@
   fadeEls.forEach(el => io.observe(el));
 </script>
 </body>
+<!-- 金融问答助手弹窗按钮 -->
+<button 
+  onclick="window.open('https://doubao.com/bot/VTGJ2B4q', '金融问答助手', 'width=400,height=650,top=100,left=100')"
+  style="
+    position: fixed;   /* 固定在页面右下角，不随滚动移动 */
+    bottom: 20px;      /* 距离页面底部20px */
+    right: 20px;       /* 距离页面右侧20px */
+    padding: 12px 20px;/* 按钮内边距，控制大小 */
+    background: #165DFF;/* 按钮背景色（蓝色），可自行修改 */
+    color: white;      /* 文字颜色 */
+    border: none;      /* 去掉边框 */
+    border-radius: 8px;/* 圆角，更美观 */
+    cursor: pointer;   /* 鼠标悬停显示手型 */
+    font-size: 14px;   /* 文字大小 */
+    z-index: 9999;     /* 确保按钮在最上层，不被其他内容遮挡 */
+    box-shadow: 0 2px 8px rgba(22, 93, 255, 0.3); /* 轻微阴影，提升质感 */
+  "
+>
+  💬 金融问答助手
+</button>
 </html>
