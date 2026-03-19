@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人金融入门馆 — 金融基础知识导览</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #0a1f44;
+    --navy-deep: #071530;
+    --navy-mid: #12305e;
+    --navy-light: #1a4080;
+    --gold: #c8a84b;
+    --gold-light: #e4c97a;
+    --gold-pale: #f5ead8;
+    --white: #ffffff;
+    --gray-50: #f8f9fb;
+    --gray-100: #eef1f6;
+    --gray-200: #dde3ed;
+    --gray-500: #7b8eaa;
+    --gray-700: #3d5070;
+    --text-dark: #111e35;
+    --text-mid: #344563;
+    --text-light: #5c6e8a;
+    --accent-teal: #1a6b8a;
+    --warn-bg: #fff8e8;
+    --warn-border: #c8a84b;
+    --alert-bg: #fef3f3;
+    --alert-border: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(7, 21, 48, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 168, 75, 0.25);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 0;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 40px;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-icon {
+    width: 32px; height: 32px;
+    background: var(--gold);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .nav-logo-icon svg { width: 18px; height: 18px; }
+
+  .nav-logo-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .nav-divider {
+    width: 1px; height: 28px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 28px 0 0;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar { display: none; }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold-light);
+    background: rgba(200, 168, 75, 0.1);
+  }
+
+  .nav-links a.active {
+    color: var(--gold);
+    background: rgba(200, 168, 75, 0.12);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-mid) 100%);
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(26,96,138,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(36px, 4.5vw, 58px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hero-title span {
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.72);
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(200,168,75,0.4);
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hero-tag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 4px;
+    padding: 7px 18px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .hero-tag:hover {
+    border-color: var(--gold);
+    background: rgba(200,168,75,0.1);
+    color: var(--gold-light);
+  }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative;
+    height: 420px;
+  }
+
+  .hv-base {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(200,168,75,0.15);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.03);
+    overflow: hidden;
+  }
+
+  .hv-accent-line {
+    position: absolute;
+    top: 0; left: 50%; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hv-circle1 {
+    position: absolute;
+    width: 260px; height: 260px;
+    right: -60px; bottom: -60px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,168,75,0.12);
+  }
+
+  .hv-circle2 {
+    position: absolute;
+    width: 180px; height: 180px;
+    right: -20px; bottom: -20px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,168,75,0.2);
+  }
+
+  .hv-cards {
+    position: absolute;
+    top: 30px; left: 24px; right: 24px;
+  }
+
+  .hv-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,168,75,0.18);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: hv-float 4s ease-in-out infinite;
+  }
+
+  .hv-card:nth-child(2) { animation-delay: 1s; }
+  .hv-card:nth-child(3) { animation-delay: 2s; }
+
+  @keyframes hv-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .hv-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(200,168,75,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .hv-card-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .hv-card-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
+  }
+
+  .hv-bar-area {
+    position: absolute;
+    bottom: 30px; left: 24px; right: 24px;
+  }
+
+  .hv-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .hv-bar-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .hv-bar-track {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .hv-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-teal), var(--gold));
+    animation: bar-grow 2.5s ease-out forwards;
+    transform-origin: left;
+  }
+
+  @keyframes bar-grow {
+    from { width: 0; }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { scroll-margin-top: 64px; }
+
+  .section-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+
+  .section-lead {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .section-divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    border-radius: 2px;
+    margin: 18px auto 0;
+  }
+
+  /* ── OVERVIEW ── */
+  #overview {
+    padding: 100px 0;
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-100);
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .ov-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+
+  .ov-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--navy), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .ov-card:hover {
+    box-shadow: 0 12px 40px rgba(10,31,68,0.1);
+    transform: translateY(-4px);
+    border-color: var(--gray-100);
+  }
+
+  .ov-card:hover::before { transform: scaleX(1); }
+
+  .ov-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .ov-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .ov-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .ov-desc {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  .ov-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--navy-light);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s, gap 0.2s;
+  }
+
+  .ov-link:hover { color: var(--gold); gap: 10px; }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-section {
+    padding: 100px 0;
+  }
+
+  .content-section:nth-child(even) {
+    background: var(--gray-50);
+  }
+
+  /* Knowledge cards */
+  .kcard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .kcard-grid.cols3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .kcard-grid.cols4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .kcard-grid.cols5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .kcard {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 26px 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .kcard:hover {
+    box-shadow: 0 8px 28px rgba(10,31,68,0.09);
+    transform: translateY(-2px);
+  }
+
+  .kcard-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .kcard h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .kcard p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .kcard-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--navy-light), var(--gold));
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .kcard:hover .kcard-accent { opacity: 1; }
+
+  /* Wide card */
+  .wcard {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-top: 20px;
+  }
+
+  .wcard h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .wcard h4::before {
+    content: '';
+    width: 4px; height: 18px;
+    background: var(--gold);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .wcard p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.85;
+  }
+
+  /* Highlight box */
+  .hbox {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .hbox-item h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .hbox-item p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+  }
+
+  /* Warn box */
+  .warn-box {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-left: 4px solid var(--warn-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .warn-box-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .warn-box-content h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #7a5a10;
+    margin-bottom: 6px;
+  }
+
+  .warn-box-content p {
+    font-size: 13.5px;
+    color: #8a6520;
+    line-height: 1.75;
+  }
+
+  /* Alert box */
+  .alert-box {
+    background: var(--alert-bg);
+    border: 1px solid var(--alert-border);
+    border-left: 4px solid var(--alert-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .alert-box-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .alert-box-content h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #9b2020;
+    margin-bottom: 6px;
+  }
+
+  .alert-box-content p {
+    font-size: 13.5px;
+    color: #b03030;
+    line-height: 1.75;
+  }
+
+  /* Info list */
+  .info-list {
+    list-style: none;
+    margin-top: 24px;
+  }
+
+  .info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .info-list li:last-child { border-bottom: none; }
+
+  .info-list-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Tags */
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    padding: 5px 14px;
+    font-size: 13px;
+    color: var(--text-mid);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .tag.gold {
+    background: var(--gold-pale);
+    border-color: rgba(200,168,75,0.3);
+    color: #7a5a10;
+  }
+
+  .tag.navy {
+    background: rgba(10,31,68,0.06);
+    border-color: rgba(10,31,68,0.15);
+    color: var(--navy-light);
+  }
+
+  /* Step flow */
+  .step-flow {
+    display: flex;
+    gap: 0;
+    margin-top: 36px;
+    position: relative;
+  }
+
+  .step-flow::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 0; right: 0;
+    height: 2px;
+    background: var(--gray-200);
+    z-index: 0;
+  }
+
+  .step-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--navy);
+  }
+
+  .step-num.gold {
+    background: var(--gold);
+    color: var(--navy);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+
+  .step-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    font-size: 12.5px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Risk section */
+  #risk-emphasis {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #risk-emphasis::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .risk-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,168,75,0.15);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 4px;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: var(--gold-light);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+  }
+
+  .risk-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .risk-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 580px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+  }
+
+  .risk-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .risk-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .risk-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(200,168,75,0.4);
+  }
+
+  .risk-card-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .risk-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .risk-card p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.75;
+  }
+
+  /* Scam section cards */
+  .scam-types {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .scam-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 22px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+
+  .scam-card:hover {
+    box-shadow: 0 6px 24px rgba(10,31,68,0.08);
+  }
+
+  .scam-icon {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    background: rgba(192,57,43,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .scam-card h4 {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .scam-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* Signal list */
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .signal-item {
+    background: rgba(192,57,43,0.04);
+    border: 1px solid rgba(192,57,43,0.12);
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #9b2020;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .signal-dot {
+    width: 18px; height: 18px;
+    background: rgba(192,57,43,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #c0392b;
+    font-weight: 700;
+  }
+
+  /* Steps protect */
+  .protect-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .protect-step {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .protect-step:hover {
+    box-shadow: 0 8px 28px rgba(10,31,68,0.09);
+    transform: translateY(-3px);
+  }
+
+  .protect-step-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 auto 14px;
+  }
+
+  .protect-step h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .protect-step p {
+    font-size: 12.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* Rational section */
+  .rational-principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .rp-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 30px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .rp-card:hover {
+    box-shadow: 0 10px 36px rgba(10,31,68,0.1);
+    transform: translateY(-3px);
+  }
+
+  .rp-bg-num {
+    position: absolute;
+    bottom: -10px; right: 16px;
+    font-size: 80px;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    color: rgba(10,31,68,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .rp-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .rp-badge {
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .rp-card p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.85;
+  }
+
+  /* Literacy methods */
+  .literacy-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .lit-card {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .lit-card:hover { transform: translateY(-4px); }
+
+  .lit-icon {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .lit-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .lit-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--navy-deep);
+    border-top: 1px solid rgba(200,168,75,0.2);
+    padding: 64px 0 40px;
+  }
+
+  .footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 36px;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+
+  .footer-brand p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.8;
+    max-width: 360px;
+  }
+
+  .footer-modules h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .footer-mod-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+  }
+
+  .footer-mod-list li a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-mod-list li a:hover { color: var(--gold-light); }
+
+  .footer-disclaimer {
+    background: rgba(200,168,75,0.07);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+
+  .footer-disclaimer-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--gold);
+  }
+
+  .footer-disclaimer p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-tag {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  /* ── Misc ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .col-block {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 28px 24px;
+  }
+
+  .col-block h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-block p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .pill {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+    .hero-visual { height: 280px; }
+    .section-wrap { padding: 0 24px; }
+    .footer-inner { padding: 0 24px; }
+    nav { padding: 0 20px; }
+    .nav-logo-text { display: none; }
+
+    .overview-grid { grid-template-columns: 1fr 1fr; }
+    .kcard-grid { grid-template-columns: 1fr; }
+    .kcard-grid.cols3 { grid-template-columns: 1fr 1fr; }
+    .kcard-grid.cols4 { grid-template-columns: 1fr 1fr; }
+    .kcard-grid.cols5 { grid-template-columns: 1fr 1fr; }
+    .hbox { grid-template-columns: 1fr; }
+    .risk-cards { grid-template-columns: 1fr; }
+    .scam-types { grid-template-columns: 1fr; }
+    .signal-grid { grid-template-columns: 1fr 1fr; }
+    .protect-steps { grid-template-columns: 1fr 1fr; }
+    .rational-principles { grid-template-columns: 1fr; }
+    .literacy-cards { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .two-col { grid-template-columns: 1fr; }
+    .step-flow { flex-direction: column; }
+    .step-flow::before { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .overview-grid { grid-template-columns: 1fr; }
+    .kcard-grid.cols3 { grid-template-columns: 1fr; }
+    .kcard-grid.cols4 { grid-template-columns: 1fr; }
+    .kcard-grid.cols5 { grid-template-columns: 1fr; }
+    .signal-grid { grid-template-columns: 1fr; }
+    .protect-steps { grid-template-columns: 1fr; }
+    .literacy-cards { grid-template-columns: 1fr; }
+    .content-section { padding: 64px 0; }
+    #overview { padding: 64px 0; }
+    .hbox { padding: 24px 20px; }
+  }
+
+  /* Scroll fade-in */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#071530" stroke-width="2.5">
+        <path d="M3 10h18M3 14h18M9 6l3-3 3 3M9 18l3 3 3-3"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">个人金融入门馆</span>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-links">
+    <a href="#hero">首页</a>
+    <a href="#module1">认识金融与银行</a>
+    <a href="#module2">常见金融产品</a>
+    <a href="#module3">风险与收益</a>
+    <a href="#module4">信用与征信</a>
+    <a href="#module5">金融诈骗防范</a>
+    <a href="#module6">理性投资与金融素养</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">金融基础知识普及 · 培训展示专题</div>
+      <h1 class="hero-title">金融基础<br><span>知识导览</span></h1>
+      <p class="hero-subtitle">从金融认知到风险防范，建立清晰、理性、稳健的金融素养</p>
+      <p class="hero-desc">本专题涵盖金融基础概念、常见产品认知、风险收益关系、信用管理、诈骗防范与理性投资六大核心模块，适合系统性了解个人金融知识体系。</p>
+      <div class="hero-tags">
+        <span class="hero-tag">📘 基础认知</span>
+        <span class="hero-tag">⚠️ 风险识别</span>
+        <span class="hero-tag">🧭 理性决策</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv-base">
+        <div class="hv-accent-line"></div>
+        <div class="hv-circle1"></div>
+        <div class="hv-circle2"></div>
+        <div class="hv-cards">
+          <div class="hv-card">
+            <div class="hv-card-icon">🏦</div>
+            <div>
+              <div class="hv-card-label">金融基础认知</div>
+              <div class="hv-card-sub">了解金融体系与银行职能</div>
+            </div>
+          </div>
+          <div class="hv-card">
+            <div class="hv-card-icon">🛡️</div>
+            <div>
+              <div class="hv-card-label">风险防范意识</div>
+              <div class="hv-card-sub">识别诈骗，保护资金安全</div>
+            </div>
+          </div>
+          <div class="hv-card">
+            <div class="hv-card-icon">📊</div>
+            <div>
+              <div class="hv-card-label">理性投资规划</div>
+              <div class="hv-card-sub">量力而行，稳健配置</div>
+            </div>
+          </div>
+        </div>
+        <div class="hv-bar-area">
+          <div class="hv-bar-row">
+            <span class="hv-bar-label">金融认知</span>
+            <div class="hv-bar-track"><div class="hv-bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="hv-bar-row">
+            <span class="hv-bar-label">风险意识</span>
+            <div class="hv-bar-track"><div class="hv-bar-fill" style="width:90%;animation-delay:0.3s"></div></div>
+          </div>
+          <div class="hv-bar-row">
+            <span class="hv-bar-label">金融素养</span>
+            <div class="hv-bar-track"><div class="hv-bar-fill" style="width:74%;animation-delay:0.6s"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OVERVIEW ── -->
+<section id="overview">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">OVERVIEW</div>
+      <h2 class="section-title">六大核心模块导览</h2>
+      <p class="section-lead">系统梳理个人金融知识体系，涵盖基础认知、产品了解、风险管控、信用管理、安全防范与理性决策六个核心主题。</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="overview-grid">
+      <div class="ov-card fade-in">
+        <div class="ov-num">MODULE 01</div>
+        <span class="ov-icon">🏦</span>
+        <div class="ov-name">认识金融与银行</div>
+        <p class="ov-desc">理解金融的核心概念、银行在金融体系中的地位与职能，以及资金在日常生活中的流动方式。</p>
+        <a href="#module1" class="ov-link">进入模块 →</a>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-num">MODULE 02</div>
+        <span class="ov-icon">💳</span>
+        <div class="ov-name">常见金融产品</div>
+        <p class="ov-desc">了解存款、贷款、银行卡、保险、理财及基金等常见金融产品的基础特点与适用场景。</p>
+        <a href="#module2" class="ov-link">进入模块 →</a>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-num">MODULE 03</div>
+        <span class="ov-icon">⚖️</span>
+        <div class="ov-name">风险与收益</div>
+        <p class="ov-desc">掌握风险与收益的基本关系，认识常见风险类型，理解风险承受能力与分散风险的基本思路。</p>
+        <a href="#module3" class="ov-link">进入模块 →</a>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-num">MODULE 04</div>
+        <span class="ov-icon">📋</span>
+        <div class="ov-name">信用与征信</div>
+        <p class="ov-desc">认识信用与征信的含义，了解哪些行为会影响征信记录，以及如何维护良好的个人信用。</p>
+        <a href="#module4" class="ov-link">进入模块 →</a>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-num">MODULE 05</div>
+        <span class="ov-icon">🛡️</span>
+        <div class="ov-name">金融诈骗防范</div>
+        <p class="ov-desc">识别常见金融诈骗类型与典型特征，掌握账户信息保护方法，知晓遇到可疑情况的处理方式。</p>
+        <a href="#module5" class="ov-link">进入模块 →</a>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-num">MODULE 06</div>
+        <span class="ov-icon">🧭</span>
+        <div class="ov-name">理性投资与金融素养</div>
+        <p class="ov-desc">树立理性投资观念，坚持先规划再决策，培养独立思考习惯，逐步提升个人金融素养。</p>
+        <a href="#module6" class="ov-link">进入模块 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODULE 1 ── -->
+<section id="module1" class="content-section">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">MODULE 01</div>
+      <h2 class="section-title">认识金融与银行</h2>
+      <p class="section-lead">金融与我们的日常生活密切相关。掌握基础金融知识，是提高金融素养的重要起点，也是理性参与金融活动的基础前提。</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="kcard-grid cols4 fade-in">
+      <div class="kcard">
+        <div class="kcard-icon">💡</div>
+        <h4>什么是金融</h4>
+        <p>金融的核心作用是促进资金在个人、企业和社会之间合理流动，从而更好地服务生产生活与经济发展。无论是储蓄、支付、贷款，还是财富管理，背后都离不开金融体系的支撑。</p>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">🏛️</div>
+        <h4>银行的职能</h4>
+        <p>银行是金融体系中最重要的组成部分之一，也是公众接触最频繁的正规金融机构。银行承担存款保管、转账结算、贷款支持等基础功能，同时在保障资金安全、提升支付效率、服务实体经济方面发挥重要作用。</p>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">🔄</div>
+        <h4>资金如何流动</h4>
+        <p>在日常场景中，资金通常通过存款、支付、贷款、投资等方式实现流动。个人和企业将闲置资金存入银行，银行再通过信贷等方式支持消费、经营与发展，形成有序的资金循环。</p>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">📚</div>
+        <h4>为何需要金融服务</h4>
+        <p>金融服务帮助个人和企业更有效地管理资金、应对不确定性、实现跨期安排。了解金融与银行的基本概念，有助于公众更理性地看待金融服务，更有效地识别风险，并作出更稳健的判断。</p>
+        <div class="kcard-accent"></div>
+      </div>
+    </div>
+
+    <div class="hbox fade-in">
+      <div class="hbox-item">
+        <h4>金融的社会意义</h4>
+        <p>金融不仅关系个人财富管理，也与社会经济运行息息相关。有效运转的金融体系能够将社会闲散资金引导至最需要的领域，推动生产效率的提升与经济结构的优化。</p>
+      </div>
+      <div class="hbox-item">
+        <h4>金融素养的起点</h4>
+        <p>了解金融与银行的基本概念，是提升金融素养的第一步。理解金融工具的本质与边界，有助于在面对不同产品和信息时保持清醒判断，避免因认知偏差产生不必要的风险。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODULE 2 ── -->
+<section id="module2" class="content-section">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">MODULE 02</div>
+      <h2 class="section-title">常见金融产品</h2>
+      <p class="section-lead">不同金融产品对应不同功能和使用场景。理解常见金融产品的基础特点，是理性使用金融服务的重要前提。</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="kcard-grid fade-in">
+      <div class="kcard">
+        <div class="kcard-icon">🏦</div>
+        <h4>存款</h4>
+        <p>存款是最基础、最常见的金融产品，主要作用是保障资金安全、满足流动性需求，并获得一定利息收益。对于风险偏好较低或短期有资金安排需求的用户而言，存款通常是较为稳健的资金管理方式。</p>
+        <div class="tag-row">
+          <span class="tag navy">流动性好</span>
+          <span class="tag navy">本金安全</span>
+          <span class="tag navy">利息固定</span>
+        </div>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">📄</div>
+        <h4>贷款</h4>
+        <p>贷款是银行向个人或企业提供资金支持的重要业务，常见于住房、消费、经营等场景。在使用贷款时需重点关注贷款利率、还款期限、月度负担和自身偿还能力，避免因过度借贷带来长期财务压力。</p>
+        <div class="tag-row">
+          <span class="tag navy">住房贷款</span>
+          <span class="tag navy">消费贷款</span>
+          <span class="tag navy">经营贷款</span>
+        </div>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">💳</div>
+        <h4>银行卡与支付工具</h4>
+        <p>银行卡和支付工具主要用于存取款、转账、消费和结算，是现代金融服务中最常见的基础工具。随着数字金融发展，支付更加便捷，但便捷并不意味着可忽视安全——规范使用账户、保护个人信息同样十分重要。</p>
+        <div class="tag-row">
+          <span class="tag navy">借记卡</span>
+          <span class="tag navy">信用卡</span>
+          <span class="tag navy">移动支付</span>
+        </div>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">📈</div>
+        <h4>理财产品与基金</h4>
+        <p>理财产品和基金通常用于财富管理，适合有一定资金安排需求并愿意承担相应风险的用户。与普通存款相比，这类产品在收益表现上存在更多变化，也伴随一定波动和不确定性。选择时应重点了解产品属性、风险等级及信息披露内容。</p>
+        <div class="tag-row">
+          <span class="tag gold">存在波动</span>
+          <span class="tag gold">需了解风险</span>
+        </div>
+        <div class="kcard-accent"></div>
+      </div>
+    </div>
+
+    <div class="wcard fade-in">
+      <h4>保险的基础作用</h4>
+      <p>保险的核心功能是<strong>风险保障</strong>，其主要价值在于帮助个人和家庭应对疾病、意外等不确定事件。保险并不是单纯追求收益的工具，而是家庭风险管理的重要组成部分。正确认识保险的保障属性，有助于建立更完整的金融风险防护意识，避免将保险单纯视为投资渠道。</p>
+    </div>
+
+    <div class="warn-box fade-in">
+      <span class="warn-box-icon">⚠️</span>
+      <div class="warn-box-content">
+        <h5>选择金融产品前，请注意</h5>
+        <p>不同产品对应不同功能，既不能简单以"收益高低"进行判断，也不能脱离自身需求盲目选择。在购买任何金融产品前，务必了解其风险属性、适用人群和期限安排，根据自身实际情况审慎决策。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODULE 3 ── -->
+<section id="module3" class="content-section">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">MODULE 03</div>
+      <h2 class="section-title">风险与收益</h2>
+      <p class="section-lead">风险与收益是理解金融产品时必须把握的基本关系。树立"收益与风险相匹配"的意识，是理性投资和风险识别的重要前提。</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="kcard-grid cols2 fade-in" style="grid-template-columns:1fr 1fr">
+      <div class="kcard">
+        <div class="kcard-icon">⚖️</div>
+        <h4>风险与收益的基本关系</h4>
+        <p>通常情况下，收益预期越高，所伴随的不确定性也往往越大。这是金融市场中的基本规律。对于普通用户而言，理解这一关系，有助于在面对各类产品宣传时保持清醒判断，避免被"高收益"噱头所误导。</p>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">🔍</div>
+        <h4>常见风险类型</h4>
+        <p>在金融活动中，风险并不只意味着"亏损"。风险还包括资金流动受限（流动性风险）、市场价格波动（市场风险）、信用违约（信用风险）等多种可能性。不同产品面临的风险类型各不相同，了解风险来源才能客观判断其是否适合自己。</p>
+        <div class="kcard-accent"></div>
+      </div>
+    </div>
+
+    <div class="kcard-grid fade-in" style="grid-template-columns:1fr 1fr;margin-top:20px">
+      <div class="kcard">
+        <div class="kcard-icon">👤</div>
+        <h4>风险承受能力</h4>
+        <p>风险承受能力是个人金融决策的重要参考。它通常与收入水平、家庭负担、资金用途、年龄阶段以及个人对波动的接受程度有关。例如，短期内需要使用的资金，通常更适合配置在安全性和流动性较高的产品中，而不应盲目追求高收益。</p>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">🗂️</div>
+        <h4>分散风险的基本思路</h4>
+        <p>分散风险是金融管理中的重要原则。将全部资金集中于单一产品、单一机构或单一渠道，容易放大单一事件带来的影响。根据自身目标合理配置资金，有助于提升整体稳健性，降低非必要风险。</p>
+        <div class="kcard-accent"></div>
+      </div>
+    </div>
+
+    <div class="alert-box fade-in">
+      <span class="alert-box-icon">🚨</span>
+      <div class="alert-box-content">
+        <h5>重要风险提示</h5>
+        <p>金融市场中不存在长期稳定的"高收益、零风险、稳赚不赔"。面对此类宣传，应保持高度警惕，增强风险识别能力，坚持通过正规渠道了解产品信息，避免因片面追求收益而忽视潜在风险。本页面内容仅作金融知识科普，不构成投资建议。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RISK EMPHASIS ── -->
+<section id="risk-emphasis">
+  <div class="section-wrap">
+    <div class="risk-inner fade-in">
+      <div class="risk-badge">⚠️ 风险意识教育</div>
+      <h2 class="risk-title">牢固树立风险防范意识</h2>
+      <p class="risk-desc">风险管理是金融素养的核心组成部分。理解风险类型、评估自身承受能力、坚持分散配置，是稳健参与金融活动的基本原则。</p>
+      <div class="risk-cards">
+        <div class="risk-card">
+          <span class="risk-card-icon">📉</span>
+          <h4>市场风险</h4>
+          <p>因市场价格波动导致资产价值变化的风险。股票、基金、理财产品均可能受到市场环境变化的影响，价格可能上涨也可能下跌。</p>
+        </div>
+        <div class="risk-card">
+          <span class="risk-card-icon">💧</span>
+          <h4>流动性风险</h4>
+          <p>资金被锁定、无法在需要时灵活取出的风险。部分产品设有固定期限或赎回限制，购买前需充分考虑自身的资金流动需求。</p>
+        </div>
+        <div class="risk-card">
+          <span class="risk-card-icon">📝</span>
+          <h4>信用风险</h4>
+          <p>交易对手无法履行还款或偿债义务的风险。选择金融产品时，应了解发行主体的信用状况，并优先通过持牌正规机构开展业务。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODULE 4 ── -->
+<section id="module4" class="content-section">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">MODULE 04</div>
+      <h2 class="section-title">信用与征信</h2>
+      <p class="section-lead">信用是现代金融活动的重要基础，也是个人长期金融行为的综合体现。良好的信用记录，是参与规范金融活动的重要基础。</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="two-col fade-in">
+      <div class="col-block">
+        <h4><span class="pill">01</span> 什么是信用</h4>
+        <p>信用反映的是一个人是否能够按照约定履行责任、按时还款、诚实守约。在银行业务和日常金融生活中，良好的信用记录具有重要价值，不仅影响贷款审批和额度，也体现个人的金融契约精神与责任意识。</p>
+      </div>
+      <div class="col-block">
+        <h4><span class="pill">02</span> 什么是征信</h4>
+        <p>征信是对个人信用行为的客观记录。金融机构在开展贷款、信用卡等业务时，通常会结合征信信息，对申请人的履约情况和信用状况进行综合评估。征信并不是单纯的"好"或"坏"，而是帮助金融机构了解用户历史行为的重要依据。</p>
+      </div>
+    </div>
+
+    <div class="wcard fade-in" style="margin-top:24px">
+      <h4>哪些行为会影响征信</h4>
+      <p>一些常见行为可能对个人征信产生影响，例如：<strong>贷款或信用卡逾期未还</strong>、长期拖欠欠款、频繁申请信贷产品等。这些情况可能影响后续金融服务的获得，也提醒我们在使用金融工具时要更加重视责任与规范，养成按时还款的良好习惯。</p>
+    </div>
+
+    <div class="kcard-grid cols2 fade-in" style="grid-template-columns:1fr 1fr;margin-top:24px">
+      <div class="kcard">
+        <div class="kcard-icon">⭐</div>
+        <h4>良好信用的价值</h4>
+        <p>良好的信用记录不仅有助于顺利办理贷款、信用卡等金融业务，也可能在利率、额度等方面获得更有利的条件。同时，良好信用体现了个人的金融素养与契约意识，是参与规范金融活动的重要基础。</p>
+        <div class="kcard-accent"></div>
+      </div>
+      <div class="kcard">
+        <div class="kcard-icon">🔐</div>
+        <h4>如何维护信用记录</h4>
+        <p>维护良好信用，首先要做到<strong>按时还款、合理借贷、量力而行</strong>。主动关注账单情况和还款安排，避免因疏忽形成不良记录。同时，妥善保护个人身份信息与账户信息，避免因他人冒用带来信用风险。</p>
+        <div class="kcard-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODULE 5 ── -->
+<section id="module5" class="content-section">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">MODULE 05</div>
+      <h2 class="section-title">金融诈骗防范</h2>
+      <p class="section-lead">提高风险识别能力，增强安全防范意识，是每一位金融消费者都应具备的基本素养。懂金融，不仅要了解产品，更要学会识别风险、保护资金安全。</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="scam-types fade-in">
+      <div class="scam-card">
+        <div class="scam-icon">📞</div>
+        <div>
+          <h4>冒充客服诈骗</h4>
+          <p>冒充银行、监管机构或电商平台客服，以账户异常、风险处置等为由，诱导用户提供验证码或转账至"安全账户"。</p>
+        </div>
+      </div>
+      <div class="scam-card">
+        <div class="scam-icon">💰</div>
+        <div>
+          <h4>虚假理财诈骗</h4>
+          <p>以超高收益为噱头，通过网络平台或社交媒体推销虚假金融产品，前期可能允许小额提现以建立信任，后续诱导大额投入后卷款跑路。</p>
+        </div>
+      </div>
+      <div class="scam-card">
+        <div class="scam-icon">🔄</div>
+        <div>
+          <h4>刷单返利诈骗</h4>
+          <p>以"在家兼职""刷单返利"为名，要求垫付资金完成任务，初期返还小额佣金诱导信任，随后以各种理由要求追加资金，最终消失。</p>
+        </div>
+      </div>
+      <div class="scam-card">
+        <div class="scam-icon">🏢</div>
+        <div>
+          <h4>非法集资诈骗</h4>
+          <p>以高额回报为承诺，通过非正规渠道向公众募集资金，通常不具备合法金融业务资质，资金安全无法保障，极易导致重大损失。</p>
+        </div>
+      </div>
+      <div class="scam-card">
+        <div class="scam-icon">⚖️</div>
+        <div>
+          <h4>冒充公检法诈骗</h4>
+          <p>冒充公安、检察院、法院等国家机关人员，以涉嫌违法为由施压，要求受害人将资金转入所谓"监管账户"配合调查。</p>
+        </div>
+      </div>
+      <div class="scam-card">
+        <div class="scam-icon">🔗</div>
+        <div>
+          <h4>钓鱼链接诈骗</h4>
+          <p>通过短信、社交媒体发送伪装成官方网站的钓鱼链接，诱导用户输入账号、密码及验证码，从而盗取账户资金和个人信息。</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px" class="fade-in">
+      <h3 style="font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px;letter-spacing:0.5px">高风险信号识别</h3>
+      <p style="font-size:14px;color:var(--text-light);margin-bottom:4px">遇到以下情形，请立即提高警惕，不轻信、不转账、不透露个人信息：</p>
+    </div>
+
+    <div class="signal-grid fade-in">
+      <div class="signal-item"><span class="signal-dot">!</span>要求立即转账或限时操作</div>
+      <div class="signal-item"><span class="signal-dot">!</span>索取短信验证码或支付密码</div>
+      <div class="signal-item"><span class="signal-dot">!</span>发送不明来源链接或二维码</div>
+      <div class="signal-item"><span class="signal-dot">!</span>诱导下载陌生"专用"软件</div>
+      <div class="signal-item"><span class="signal-dot">!</span>承诺明显不合理的高额收益</div>
+      <div class="signal-item"><span class="signal-dot">!</span>要求转账至"安全账户"</div>
+    </div>
+
+    <div style="margin-top:40px" class="fade-in">
+      <h3 style="font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:20px;letter-spacing:0.5px">账户与信息安全保护</h3>
+    </div>
+
+    <div class="protect-steps fade-in">
+      <div class="protect-step">
+        <div class="protect-step-num">1</div>
+        <h4>保护敏感信息</h4>
+        <p>银行卡号、密码、验证码、身份证号等信息不应随意泄露，也不应通过不明渠道提交。</p>
+      </div>
+      <div class="protect-step">
+        <div class="protect-step-num">2</div>
+        <h4>使用正规渠道</h4>
+        <p>办理金融业务时，应优先通过银行官网、官方App、正规营业网点等渠道获取服务和信息。</p>
+      </div>
+      <div class="protect-step">
+        <div class="protect-step-num">3</div>
+        <h4>遇疑立即核实</h4>
+        <p>如遇可疑情况，应立即停止操作，通过银行官方客服或营业网点进行核实确认。</p>
+      </div>
+      <div class="protect-step">
+        <div class="protect-step-num">4</div>
+        <h4>异常交易及时处置</h4>
+        <p>若已发生异常交易，应尽快联系银行采取止付、冻结等措施，争取将损失降到最低。</p>
+      </div>
+    </div>
+
+    <div class="alert-box fade-in">
+      <span class="alert-box-icon">🔴</span>
+      <div class="alert-box-content">
+        <h5>正规金融机构郑重提示</h5>
+        <p>正规金融机构<strong>不会</strong>通过电话或短信要求客户提供支付密码、短信验证码，也不会要求向所谓"安全账户"转账。接到此类要求，请立即挂断，并拨打银行官方客服电话核实。增强风险意识、坚持正规渠道，是防范金融诈骗的有效方式。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODULE 6 ── -->
+<section id="module6" class="content-section">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-num">MODULE 06</div>
+      <h2 class="section-title">理性投资与金融素养</h2>
+      <p class="section-lead">理性投资强调长期思维、稳健判断和独立分析，而非盲目追逐热点或因短期波动作出冲动选择。对于普通用户而言，理性投资本身就是金融素养的重要体现。</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="rational-principles fade-in">
+      <div class="rp-card">
+        <div class="rp-bg-num">01</div>
+        <h4><span class="rp-badge">原则</span> 什么是理性投资</h4>
+        <p>理性投资是指在充分了解自身需求和风险承受能力的基础上，审慎作出金融决策。它强调基于事实和逻辑作出判断，而不是受短期情绪、市场热点或他人建议左右，从而在复杂的金融环境中保持稳健。</p>
+      </div>
+      <div class="rp-card">
+        <div class="rp-bg-num">02</div>
+        <h4><span class="rp-badge">原则</span> 先规划，再决策</h4>
+        <p>在进行任何金融决策前，首先应明确资金用途、使用期限和流动性需求。不同阶段的资金安排，应匹配不同的产品类型和风险水平。先做好规划，再进行选择，才能避免"先购买、后理解"的被动局面。</p>
+      </div>
+      <div class="rp-card">
+        <div class="rp-bg-num">03</div>
+        <h4><span class="rp-badge">原则</span> 不盲从、不冲动</h4>
+        <p>面对市场信息和产品宣传，保持独立思考尤为重要。热门产品、朋友推荐或网络信息，不能替代对产品本身的判断。了解产品性质、阅读关键信息、关注风险提示，是作出理性选择的重要步骤。尤其面对高收益承诺时，更应坚持审慎原则。</p>
+      </div>
+      <div class="rp-card">
+        <div class="rp-bg-num">04</div>
+        <h4><span class="rp-badge">原则</span> 长期主义与稳健意识</h4>
+        <p>稳健的财富管理更强调长期积累和合理配置，而不是频繁交易和短期投机。对于零基础用户而言，提高金融素养并不意味着掌握复杂理论，而是逐步形成正确的风险观念、理性的资金管理习惯和规范的金融行为方式。</p>
+      </div>
+    </div>
+
+    <div style="margin-top:52px" class="fade-in">
+      <h3 style="font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px;text-align:center;letter-spacing:1px">提升金融素养的方法</h3>
+      <p style="text-align:center;font-size:14px;color:var(--text-light);margin-bottom:36px">金融素养的积累是一个持续的过程。从以下几个方向出发，可以有效提升个人金融认知水平。</p>
+    </div>
+
+    <div class="literacy-cards fade-in">
+      <div class="lit-card">
+        <span class="lit-icon">📰</span>
+        <h4>持续学习基础知识</h4>
+        <p>通过银行、监管机构、权威媒体等渠道持续获取金融基础知识，建立系统性的金融认知框架，避免碎片化信息带来的误判。</p>
+      </div>
+      <div class="lit-card">
+        <span class="lit-icon">🏛️</span>
+        <h4>关注权威信息来源</h4>
+        <p>优先参考银行官方发布内容、金融监管机构公告及权威财经资讯，对来源不明或夸大宣传的信息保持审慎态度。</p>
+      </div>
+      <div class="lit-card">
+        <span class="lit-icon">✅</span>
+        <h4>坚持正规渠道办理</h4>
+        <p>通过持牌金融机构的官方渠道开展金融业务，拒绝通过非正规平台、陌生人介绍或不明链接办理任何涉及资金的操作。</p>
+      </div>
+    </div>
+
+    <div class="warn-box fade-in">
+      <span class="warn-box-icon">📌</span>
+      <div class="warn-box-content">
+        <h5>温馨提示</h5>
+        <p>本页面内容用于金融知识普及与培训展示，不构成任何具体产品推荐或投资建议。涉及具体金融业务，请以正规金融机构官方说明为准。提升金融素养，从了解基础知识开始，逐步建立理性、稳健的金融行为习惯。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>个人金融入门馆</h3>
+        <p>本专题系统梳理了个人金融知识的六大核心主题，旨在帮助公众建立清晰、理性、稳健的金融素养体系，提升风险识别能力，增强金融安全意识。</p>
+        <div class="tag-row" style="margin-top:20px">
+          <span class="tag" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.45)">金融知识科普</span>
+          <span class="tag" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.45)">风险防范教育</span>
+          <span class="tag" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.45)">培训展示专题</span>
+        </div>
+      </div>
+      <div class="footer-modules">
+        <h4>内容模块导航</h4>
+        <ul class="footer-mod-list">
+          <li><a href="#module1">01 · 认识金融与银行</a></li>
+          <li><a href="#module2">02 · 常见金融产品</a></li>
+          <li><a href="#module3">03 · 风险与收益</a></li>
+          <li><a href="#module4">04 · 信用与征信</a></li>
+          <li><a href="#module5">05 · 金融诈骗防范</a></li>
+          <li><a href="#module6">06 · 理性投资与金融素养</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-disclaimer">
+      <span class="footer-disclaimer-icon">⚠️</span>
+      <p><strong style="color:rgba(255,255,255,0.7)">温馨提示：</strong>本页面内容主要用于金融基础知识科普与培训展示，旨在帮助公众了解常见金融概念、增强风险识别能力、提升金融素养，不构成具体业务办理依据或投资建议。涉及具体产品、服务规则及业务办理流程，请以银行等正规金融机构官方发布信息为准。</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">本页面仅用于金融基础知识普及与培训展示 · 不构成具体产品推荐或投资建议</span>
+      <span class="footer-tag">金融知识普及展示专题</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll + active nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Nav active state on scroll
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = ['hero','module1','module2','module3','module4','module5','module6'].map(id => document.getElementById(id));
+
+  function updateNav() {
+    const scrollY = window.scrollY + 100;
+    let current = 'hero';
+    sections.forEach(s => { if (s && scrollY >= s.offsetTop) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  fadeEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
